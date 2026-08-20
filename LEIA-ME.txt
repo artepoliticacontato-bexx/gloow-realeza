@@ -1,0 +1,26 @@
+REALEZA GLOOW.VIP - LANDING PAGE
+
+COMO VISUALIZAR
+1. Descompacte o arquivo recebido.
+2. Abra o arquivo index.html em um navegador.
+
+COMO PUBLICAR
+Envie todos os arquivos e a pasta assets para a raiz da hospedagem,
+mantendo a estrutura original das pastas.
+
+ARQUIVOS PRINCIPAIS
+- index.html: conteúdo da página
+- styles.css: estrutura visual
+- immersive.css: experiência imersiva e responsiva
+- script.js: simulador, login e movimentos
+- assets/: imagens da campanha
+
+Observação: o login desta versão é demonstrativo. O formulário de inscrição
+valida nome completo, CPF, data de nascimento, e-mail, WhatsApp e consentimento,
+mas precisa ser conectado a um banco de dados ou CRM antes da publicação para
+que os cadastros sejam efetivamente armazenados.
+
+SIMULADOR
+O simulador usa internamente uma referência única de R$ 119,90 por ativação,
+sem exibir o valor do plano. As camadas liberadas dependem do título escolhido:
+Consulesa (1º nível), Duqueza (1º e 2º) e Embaixadora (1º, 2º e 3º).

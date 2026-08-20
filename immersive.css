@@ -1,0 +1,140 @@
+:root { --scroll: 0; }
+body { overflow-x: hidden; }
+
+.opening { position: fixed; inset: 0; z-index: 200; background: #f8f3ea; display: grid; place-items: center; animation: openingOut 1s 1.7s cubic-bezier(.76,0,.24,1) forwards; pointer-events: none; }
+.opening > div { display: flex; flex-direction: column; align-items: center; gap: 15px; animation: openingMark 1.5s ease both; }
+.opening svg { width: 70px; }
+.opening span { font: 12px 'DM Sans'; letter-spacing: .55em; color: var(--ink); }
+.opening i { width: 130px; height: 1px; background: #dfd3bf; position: relative; overflow: hidden; }
+.opening i::after { content: ''; position: absolute; inset: 0; background: var(--gold); transform: translateX(-100%); animation: loadingLine 1.25s .2s ease forwards; }
+@keyframes loadingLine { to { transform: none; } }
+@keyframes openingMark { 0% { opacity: 0; transform: translateY(10px); } 30%,100% { opacity: 1; transform: none; } }
+@keyframes openingOut { to { transform: translateY(-100%); visibility: hidden; } }
+
+.cursor-aura { position: fixed; left: -500px; top: -500px; width: 420px; height: 420px; border-radius: 50%; z-index: 3; pointer-events: none; transform: translate(-50%,-50%); background: radial-gradient(circle,rgba(255,245,216,.18),transparent 68%); mix-blend-mode: screen; }
+.page-progress { position: fixed; right: 0; top: 0; height: 100vh; width: 2px; background: rgba(184,149,76,.12); z-index: 100; }
+.page-progress i { display: block; width: 100%; height: calc(var(--scroll) * 100%); background: linear-gradient(var(--gold2),var(--gold)); }
+.topbar { background: rgba(251,248,241,.64); }
+.topbar.scrolled { background: rgba(251,248,241,.91); }
+
+.hero { display: flex; align-items: center; min-height: 110svh; }
+.hero-media { position: absolute; inset: 0; overflow: hidden; }
+.hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: center; transform: scale(calc(1.04 + var(--scroll) * .035)) translateY(calc(var(--scroll) * 40px)); will-change: transform; }
+.hero-wash { position: absolute; inset: 0; background: linear-gradient(90deg,rgba(251,248,241,.98) 0%,rgba(251,248,241,.91) 32%,rgba(251,248,241,.18) 58%,rgba(251,248,241,.02) 100%); }
+.hero-copy { z-index: 4; max-width: 70vw; }
+.hero-copy h1 { max-width: 980px; font-size: clamp(56px,6.6vw,106px); text-wrap: balance; text-shadow: 0 1px 18px rgba(255,255,255,.34); }
+.hero .lead { color: #5f564e; max-width: 630px; }
+.orb { display: none; }
+.silk { position: absolute; z-index: 3; border-radius: 50%; border: 1px solid rgba(255,255,255,.68); filter: blur(.5px); pointer-events: none; }
+.silk-one { width: 30vw; height: 80vh; left: -17vw; top: 20vh; transform: rotate(22deg); background: linear-gradient(110deg,rgba(255,255,255,.42),transparent); }
+.silk-two { width: 22vw; height: 55vh; left: 42vw; bottom: -32vh; transform: rotate(-34deg); background: rgba(255,255,255,.13); }
+.hero-seal { right: 7vw; top: auto; bottom: 11vh; width: 220px; height: 220px; border-color: rgba(255,255,255,.7); background: rgba(255,255,255,.15); backdrop-filter: blur(8px); box-shadow: inset 0 0 0 10px rgba(255,255,255,.12); z-index: 4; color: white; }
+.hero-seal span { font-size: 90px; color: #fff; text-shadow: 0 2px 20px rgba(125,85,27,.4); }
+.hero-seal p { bottom: 32px; font-size: 7px; }
+.scroll-cue { z-index: 4; }
+.editorial-note { position: absolute; right: 4vw; top: 130px; z-index: 4; color: white; display: grid; grid-template-columns: auto auto; gap: 4px 10px; align-items: end; text-shadow: 0 1px 10px rgba(59,49,41,.25); }
+.editorial-note span { font-size: 7px; letter-spacing: .25em; }
+.editorial-note b { font: 30px 'Italiana'; }
+.editorial-note i { grid-column: 1/3; height: 1px; width: 75px; background: rgba(255,255,255,.65); }
+.editorial-note small { grid-column: 1/3; font-size: 7px; letter-spacing: .12em; line-height: 1.5; }
+
+.manifesto-film { height: 145vh; position: relative; overflow: hidden; background: #9f8150; }
+.film-bg { position: absolute; inset: -10%; background: url('assets/realeza-fio-dourado-v2.png') center/cover no-repeat; transform: translateY(calc((var(--scroll) - .2) * -90px)) scale(1.08); will-change: transform; }
+.film-shade { position: absolute; inset: 0; background: linear-gradient(90deg,rgba(82,58,26,.66),rgba(99,70,31,.12) 65%,rgba(67,48,23,.25)); }
+.film-copy { position: sticky; top: 0; height: 100vh; display: flex; justify-content: center; flex-direction: column; padding: 0 8vw; color: white; max-width: 1100px; z-index: 2; }
+.film-copy .eyebrow { color: #f3deab; }
+.film-copy blockquote { font: clamp(55px,7vw,112px)/.96 'Italiana'; margin: 0; }
+.film-copy blockquote em { color: #fff0c9; }
+.film-copy > span { max-width: 550px; margin-top: 35px; line-height: 1.7; color: rgba(255,255,255,.8); }
+.light-thread { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.light-thread i { position: absolute; width: 7px; height: 7px; background: white; border-radius: 50%; box-shadow: 0 0 22px 8px #f8d990; animation: twinkle 2.8s infinite alternate; }
+.light-thread i:nth-child(1) { left: 3%; top: 74%; }.light-thread i:nth-child(2) { left: 35%; top: 55%; animation-delay: .6s; }.light-thread i:nth-child(3) { left: 66%; top: 34%; animation-delay: 1.2s; }.light-thread i:nth-child(4) { right: 4%; top: 14%; animation-delay: 1.8s; }
+@keyframes twinkle { to { transform: scale(1.8); opacity: .35; } }
+
+.journey-intro { text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; background: #6d5a47; color: white; min-height: 115svh; }
+.journey-photo { position: absolute; inset: 0; background: url('assets/realeza-ascensao-v2.png') center/cover no-repeat; transform: scale(1.02); transition: transform 6s ease; }
+.journey-intro:hover .journey-photo { transform: scale(1.07); }
+.journey-shade { position: absolute; inset: 0; background: linear-gradient(180deg,rgba(55,43,32,.06),rgba(47,35,25,.68)); }
+.journey-copy { z-index: 2; margin-top: 45vh; }
+.journey-copy h2 { text-shadow: 0 5px 30px rgba(39,27,19,.4); }
+.journey-copy h2 em { color: #f1d89f; }
+.journey-copy > p:last-child { max-width: 560px; line-height: 1.7; color: rgba(255,255,255,.82); margin: 30px auto 0; }
+.chapter-index { position: absolute; bottom: 40px; right: 5vw; z-index: 3; display: flex; align-items: center; gap: 12px; font-size: 11px; letter-spacing: .15em; }
+.chapter-index i { height: 1px; width: 90px; background: rgba(255,255,255,.55); }
+
+.rank { isolation: isolate; }
+.rank-portrait { position: absolute; right: 0; top: 0; width: 52%; height: 100%; z-index: -1; background-image: url('assets/realeza-ascensao-v2.png'); background-size: 300% 100%; background-repeat: no-repeat; overflow: hidden; }
+.rank-portrait::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg,var(--ivory),transparent 42%),linear-gradient(0deg,rgba(63,46,29,.12),transparent); }
+.rank-portrait span { position: absolute; bottom: 30px; right: 40px; font: 160px 'Italiana'; color: rgba(255,255,255,.45); z-index: 2; }
+.portrait-one { background-position: left center; }.portrait-two { background-position: center; }.portrait-three { background-position: right center; }
+.rank-copy { background: rgba(251,248,241,.88); backdrop-filter: blur(16px); padding: 42px; box-shadow: var(--shadow); border: 1px solid rgba(255,255,255,.7); position: relative; }
+.duqueza .rank-copy { background: rgba(244,237,225,.89); }
+.rank-card,.network-viz,.medallion { position: relative; z-index: 2; }
+.rank-card { backdrop-filter: blur(14px); }
+.button,.rank-card,.calc-panel { transition: transform .35s ease,box-shadow .35s ease; }
+.section-signup { display: flex; align-items: center; justify-content: flex-end; gap: 24px; margin-top: 35px; }
+.section-signup p,.dashboard-signup p { font: 25px 'Italiana'; margin: 0; }
+.rank-cta { margin-top: 28px; border: 0; }
+.rank-side { justify-self: center; display: flex; flex-direction: column; align-items: center; gap: 38px; position: relative; z-index: 2; }
+.rank-side .network-viz,.rank-side .medallion { justify-self: auto; }
+.dashboard-signup { display: flex; justify-content: center; align-items: center; gap: 30px; margin: 44px auto 0; }
+
+.signup-modal { width: min(680px,94vw); }
+.signup-modal form { display: grid; grid-template-columns: 1fr 1fr; gap: 0 18px; }
+.signup-modal form label { margin: 10px 0; }
+.signup-modal .wide { grid-column: 1/3; }
+.privacy-consent { display: grid!important; grid-template-columns: auto 1fr; align-items: start; gap: 10px!important; color: var(--muted); line-height: 1.45; }
+.privacy-consent input { margin-top: 2px; accent-color: var(--gold); }
+.form-status { min-height: 18px; margin: 8px 0 0; text-align: center; font-size: 12px; color: #5e806a; }
+.signup-modal.submitted form { display: none; }
+.signup-modal.submitted > p:not(.eyebrow) { color: #5e806a; }
+.level-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 34px; }
+.level-pills button { border: 1px solid var(--line); background: white; padding: 13px 18px; color: var(--muted); cursor: pointer; font: 600 11px 'DM Sans'; letter-spacing: .06em; text-transform: uppercase; transition: .25s ease; }
+.level-pills button:hover,.level-pills button.active { border-color: var(--gold); color: var(--gold); background: #fbf5e9; box-shadow: 0 8px 24px rgba(155,118,52,.1); }
+.calc-panel label[hidden],.calc-breakdown [hidden] { display: none; }
+.calc-breakdown { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin: -7px 0 26px; }
+.calc-breakdown > div { padding: 13px 11px; border: 1px solid var(--line); background: rgba(255,255,255,.56); }
+.calc-breakdown span { display: block; color: var(--muted); font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
+.calc-breakdown b { display: block; margin-top: 6px; color: var(--gold); font: 18px 'Italiana'; }
+.calc-disclaimer { margin: -9px 0 22px; color: var(--muted); font-size: 10px; line-height: 1.55; text-align: center; }
+
+@media (max-width: 900px) {
+  .hero-copy { max-width: 85vw; }
+  .hero-wash { background: linear-gradient(90deg,rgba(251,248,241,.96),rgba(251,248,241,.7) 58%,rgba(251,248,241,.05)); }
+  .hero-seal { opacity: .5; }
+  .rank-portrait { width: 100%; opacity: .35; }
+  .rank-copy { max-width: 620px; }
+}
+@media (max-width: 600px) {
+  .cursor-aura,.page-progress,.editorial-note { display: none; }
+  .hero { min-height: 100svh; padding-top: 100px; }
+  .hero-media img { object-position: 62% center; }
+  .hero-wash { background: linear-gradient(180deg,rgba(251,248,241,.28),rgba(251,248,241,.94) 45%,rgba(251,248,241,.99) 100%); }
+  .hero-copy { align-self: flex-end; max-width: 100%; padding-bottom: 45px; }
+  .hero-copy h1 { font-size: 49px; }
+  .manifesto-film { height: 120vh; }
+  .film-copy { padding-inline: 22px; }
+  .film-copy blockquote { font-size: 48px; }
+  .journey-intro { min-height: 100svh; }
+  .journey-photo { background-position: 52% center; }
+  .journey-copy { margin-top: 52vh; padding-inline: 22px; }
+  .journey-copy h2 { font-size: 48px; }
+  .rank { padding-top: 58vh; }
+  .rank-portrait { height: 60vh; opacity: 1; }
+  .rank-portrait::after { background: linear-gradient(0deg,var(--ivory),transparent 45%); }
+  .rank-copy { padding: 30px 20px; background: var(--ivory); box-shadow: none; border: 0; }
+  .duqueza .rank-copy { background: #f0e8db; }
+  .rank-number { display: none; }
+  .section-signup,.dashboard-signup { align-items: stretch; flex-direction: column; text-align: center; }
+  .rank-side { gap: 28px; }
+  .signup-modal form { grid-template-columns: 1fr; }
+  .signup-modal .wide { grid-column: 1; }
+  .signup-modal { padding: 42px 22px; }
+  .signup-modal h2 { font-size: 40px; }
+  .level-pills { display: grid; grid-template-columns: 1fr; }
+  .calc-breakdown { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,*::before,*::after { animation-duration: .01ms!important; animation-iteration-count: 1!important; scroll-behavior: auto!important; transition-duration: .01ms!important; }
+  .opening { display: none; }
+}
