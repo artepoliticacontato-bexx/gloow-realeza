@@ -113,6 +113,54 @@
 
   <dialog id="loginModal"><button class="close" aria-label="Fechar">×</button><div class="login-crown"><svg class="queen-crown" viewBox="0 0 88 48"><path d="M8 38 3 12l21 14L44 4l20 22 21-14-5 26Z"/><path d="M9 42h70"/></svg></div><p class="eyebrow">ÁREA DA CORTE</p><h2>Bem-vinda de volta.</h2><p>Acompanhe sua ascensão, sua rede e tudo o que você conquistou.</p><form id="loginForm"><label>E-mail<input type="email" placeholder="seu@email.com" required></label><label>Senha<input type="password" placeholder="••••••••" required></label><div class="form-row"><label class="check"><input type="checkbox"> Lembrar de mim</label><a href="#">Esqueci minha senha</a></div><button class="button primary full">Entrar na minha Corte</button></form><small>Ainda não faz parte? <a href="#adesao" class="close-link">Inicie sua ascensão</a></small></dialog>
   <dialog id="signupModal" class="signup-modal"><button class="close" aria-label="Fechar">×</button><div class="login-crown"><svg class="queen-crown" viewBox="0 0 88 48"><path d="M8 38 3 12l21 14L44 4l20 22 21-14-5 26Z"/><path d="M9 42h70"/></svg></div><p class="eyebrow">INSCRIÇÃO À CORTE</p><h2>Inicie sua ascensão.</h2><p>Preencha seus dados para receber as próximas orientações da REALEZA GLOOW.VIP.</p><form id="signupForm" autocomplete="on"><label class="wide">Nome completo<input type="text" name="nomeCompleto" autocomplete="name" placeholder="Como consta em seu documento" minlength="3" required></label><label>CPF<input type="text" name="cpf" inputmode="numeric" autocomplete="off" placeholder="000.000.000-00" maxlength="14" required></label><label>Data de nascimento<input type="date" name="dataNascimento" autocomplete="bday" required></label><label>E-mail<input type="email" name="email" autocomplete="email" placeholder="seu@email.com" required></label><label>WhatsApp<input type="tel" name="whatsapp" inputmode="tel" autocomplete="tel" placeholder="(00) 00000-0000" maxlength="15" required></label><label class="privacy-consent wide"><input type="checkbox" name="consentimento" required><span>Autorizo o uso destes dados para contato sobre a REALEZA GLOOW.VIP e declaro ter lido a política de privacidade.</span></label><button class="button primary full wide">Confirmar minha inscrição</button><p class="form-status wide" role="status" aria-live="polite"></p></form><small>Seus dados serão tratados de forma segura e não serão compartilhados sem autorização.</small></dialog>
+  
+<script>
+// ── GLOOW Edge Function Integration ──────────────────────────────
+const EDGE_URL = "https://klfnjrdwynhdhesbfwpv.supabase.co/functions/v1/salvar-lead";
+
+document.getElementById('signupForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const form = e.target;
+  const status = form.querySelector('.form-status');
+  const btn = form.querySelector('button[type="submit"], button.button.primary');
+  
+  const nome = form.nomeCompleto?.value?.trim() || '';
+  const email = form.email?.value?.trim() || '';
+  const whatsapp = form.whatsapp?.value?.trim() || '';
+  const cpf = form.cpf?.value?.trim() || '';
+
+  if (!nome || !email || !whatsapp) {
+    if (status) status.textContent = 'Por favor, preencha nome, e-mail e WhatsApp.';
+    return;
+  }
+
+  if (btn) { btn.disabled = true; btn.textContent = 'Enviando...'; }
+  if (status) status.textContent = '';
+
+  try {
+    const res = await fetch(EDGE_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nome, email, whatsapp, perfil: 'realeza-gloow', usa_gloow: 'Não informado', cidade: '' })
+    });
+
+    if (res.ok) {
+      if (status) {
+        status.style.color = '#b99752';
+        status.textContent = '✦ Inscrição realizada com sucesso! Em breve nossa equipe entrará em contato.';
+      }
+      form.reset();
+      if (btn) { btn.textContent = 'Inscrição confirmada ✓'; }
+    } else {
+      throw new Error('Erro ' + res.status);
+    }
+  } catch(err) {
+    if (status) { status.style.color = '#c0392b'; status.textContent = 'Erro ao enviar. Tente novamente.'; }
+    if (btn) { btn.disabled = false; btn.textContent = 'Confirmar minha inscrição'; }
+  }
+});
+</script>
+
   <script src="script.js?v=4"></script>
 </body>
 </html>
